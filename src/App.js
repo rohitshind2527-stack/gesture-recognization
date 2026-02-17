@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
+import "./App.css";
 
 export default function App() {
   const canvasRef = useRef(null);
+  const [showPoster, setShowPoster] = useState(true);
 
-  const W = 360;
-  const H = 540;
-  const ROAD_W = 220;
+  // Responsive Size
+  const W = window.innerWidth > 900 ? 900 : 460;
+  const H = window.innerHeight > 700 ? 600 : 500;
+
+  const ROAD_W = W * 0.4;
   const ROAD_X = (W - ROAD_W) / 2;
 
   const [speed, setSpeed] = useState(0);
@@ -19,9 +23,9 @@ export default function App() {
   const lastSpawnRef = useRef(0);
   const scoreRef = useRef(0);
 
-  // Fullscreen city background
   const cityBg = new Image();
-  cityBg.src = "https://i.ibb.co/3F2RzT7/city-bg.jpg"; // building background
+  cityBg.src =
+    "/bgg.png";
 
   const restartGame = () => {
     carsRef.current = [];
@@ -62,7 +66,7 @@ export default function App() {
       const y = H - 130;
       const cx = ROAD_X + bikeX;
 
-      ctx.fillStyle = "rgba(0,0,0,0.4)";
+      ctx.fillStyle = "rgba(18, 199, 33, 0.4)";
       ctx.beginPath();
       ctx.ellipse(cx, y + 55, 14, 6, 0, 0, Math.PI * 2);
       ctx.fill();
@@ -230,9 +234,9 @@ export default function App() {
     onClick={() => setPaused(true)}
     style={{
       position: "absolute",
-      top: `${H + 20}px`,  // below canvas
-      left: "20px",         // left margin
-      right: "280px",        // right margin
+      top: `${H + 1}px`,  // below canvas
+      left: "200px",         // left margin
+      right: "1100px",        // right margin
       margin: "0 auto",     // center horizontally
       display: "block",
       padding: "10px 0",
